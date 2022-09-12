@@ -24,7 +24,6 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="LOGO.png"/></td>
   <td id="projectalign">
    <div id="projectname">Honda Pushbutton<span id="projectnumber">&#160;Phase 1</span>
    </div>
@@ -143,7 +142,7 @@ $(document).ready(function(){initNavTree('_l_e_d_8c_source.html',''); initResiza
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    PORTE-&gt;PCR[9] = PORT_PCR_MUX(2);                                        <span class="comment">// FTM0, Channel7</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    PORTE-&gt;PCR[11] = PORT_PCR_MUX(2);                                       <span class="comment">// FTM2, Channel5 ** DUPLICATE OUTPUT CH, SEE PTD14</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    PORTE-&gt;PCR[11] = PORT_PCR_MUX(4);                                       <span class="comment">// FTM2, Channel5, Mode 4 not typ. ** DUPLICATE OUTPUT CH, SEE PTD14</span></div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">//  PORTE-&gt;PCR[13] = PORT_PCR_MUX(2);                                       // FTM4, CH5  ** FTM4 DOES NOT EXIST ON THE DEV BOARD</span></div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
@@ -192,18 +191,18 @@ $(document).ready(function(){initNavTree('_l_e_d_8c_source.html',''); initResiza
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="comment">/* Set LEDs to max intensity */</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    FTM0-&gt;CONTROLS[2].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a>);                            <span class="comment">// Ind P1</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    FTM0-&gt;CONTROLS[3].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a>);                            <span class="comment">// Ind P2</span></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    FTM0-&gt;CONTROLS[5].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a>);                            <span class="comment">// Ind R1</span></div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    FTM0-&gt;CONTROLS[6].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a>);                            <span class="comment">// Ind R2</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    FTM0-&gt;CONTROLS[7].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a>);                            <span class="comment">// Ind N1</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    FTM0-&gt;CONTROLS[2].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a> / 2);                        <span class="comment">// Ind P1</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    FTM0-&gt;CONTROLS[3].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a> / 2);                        <span class="comment">// Ind P2</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    FTM0-&gt;CONTROLS[5].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a> / 2);                        <span class="comment">// Ind R1</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    FTM0-&gt;CONTROLS[6].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a> / 2);                        <span class="comment">// Ind R2</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    FTM0-&gt;CONTROLS[7].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a> / 2);                        <span class="comment">// Ind N1</span></div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    FTM1-&gt;CONTROLS[5].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a>);                            <span class="comment">// Bkl C2</span></div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    FTM2-&gt;CONTROLS[0].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a>);                            <span class="comment">// Ind D4</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    FTM2-&gt;CONTROLS[1].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a>);                            <span class="comment">// Ind D3</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    FTM2-&gt;CONTROLS[2].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a>);                            <span class="comment">// Ind D2</span></div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    FTM2-&gt;CONTROLS[3].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a>);                            <span class="comment">// Ind D1</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    FTM2-&gt;CONTROLS[0].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a> / 2);                        <span class="comment">// Ind D4</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    FTM2-&gt;CONTROLS[1].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a> / 2);                        <span class="comment">// Ind D3</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    FTM2-&gt;CONTROLS[2].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a> / 2);                        <span class="comment">// Ind D2</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    FTM2-&gt;CONTROLS[3].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a> / 2);                        <span class="comment">// Ind D1</span></div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    FTM2-&gt;CONTROLS[4].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a>);                            <span class="comment">// Bkl Park</span></div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    FTM2-&gt;CONTROLS[5].CnV = FTM_CnV_VAL(<a class="code hl_define" href="_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844">PERIOD</a>);                            <span class="comment">// Bkl C1 &amp;&amp; Ind N2 // DUPLICATE MODULE</span></div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
@@ -440,8 +439,8 @@ $(document).ready(function(){initNavTree('_l_e_d_8c_source.html',''); initResiza
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_55c25a45ee28b691cd54898f34bfedd0.html">HondaPushButton</a></li><li class="navelem"><a class="el" href="dir_c3893ae276e5cbce9d5d0ab0031325f2.html">src</a></li><li class="navelem"><a class="el" href="_l_e_d_8c.html">LED.c</a></li>
-    <li class="footer">Generated on Fri Sep 9 2022 15:45:10 for Honda Pushbutton by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_l_e_d_8c.html">LED.c</a></li>
+    <li class="footer">Generated on Mon Sep 12 2022 16:16:58 for Honda Pushbutton by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
   </ul>
 </div>
 </body>

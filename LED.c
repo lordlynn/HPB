@@ -47,7 +47,7 @@ void PWM_init() {
 
 	/****  Select output pins from PORTD  ****/
 	PORTE->PCR[9] = PORT_PCR_MUX(2); 										// FTM0, Channel7
-	PORTE->PCR[11] = PORT_PCR_MUX(2); 										// FTM2, Channel5 ** DUPLICATE OUTPUT CH, SEE PTD14
+	PORTE->PCR[11] = PORT_PCR_MUX(4); 										// FTM2, Channel5, Mode 4 not typ. ** DUPLICATE OUTPUT CH, SEE PTD14
 //	PORTE->PCR[13] = PORT_PCR_MUX(2); 										// FTM4, CH5  ** FTM4 DOES NOT EXIST ON THE DEV BOARD
 
 	/****  Enable registers updating from write buffers  ****/
@@ -96,18 +96,18 @@ void PWM_init() {
 
 	/****  Set initial channel duty cycle  ****/
 	/* Set LEDs to max intensity */
-	FTM0->CONTROLS[2].CnV = FTM_CnV_VAL(PERIOD);							// Ind P1
-	FTM0->CONTROLS[3].CnV = FTM_CnV_VAL(PERIOD);							// Ind P2
-	FTM0->CONTROLS[5].CnV = FTM_CnV_VAL(PERIOD);							// Ind R1
-	FTM0->CONTROLS[6].CnV = FTM_CnV_VAL(PERIOD);							// Ind R2
-	FTM0->CONTROLS[7].CnV = FTM_CnV_VAL(PERIOD);							// Ind N1
+	FTM0->CONTROLS[2].CnV = FTM_CnV_VAL(PERIOD / 2);						// Ind P1
+	FTM0->CONTROLS[3].CnV = FTM_CnV_VAL(PERIOD / 2);						// Ind P2
+	FTM0->CONTROLS[5].CnV = FTM_CnV_VAL(PERIOD / 2);						// Ind R1
+	FTM0->CONTROLS[6].CnV = FTM_CnV_VAL(PERIOD / 2);						// Ind R2
+	FTM0->CONTROLS[7].CnV = FTM_CnV_VAL(PERIOD / 2);						// Ind N1
 
 	FTM1->CONTROLS[5].CnV = FTM_CnV_VAL(PERIOD);							// Bkl C2
 
-	FTM2->CONTROLS[0].CnV = FTM_CnV_VAL(PERIOD);							// Ind D4
-	FTM2->CONTROLS[1].CnV = FTM_CnV_VAL(PERIOD);							// Ind D3
-	FTM2->CONTROLS[2].CnV = FTM_CnV_VAL(PERIOD);							// Ind D2
-	FTM2->CONTROLS[3].CnV = FTM_CnV_VAL(PERIOD);							// Ind D1
+	FTM2->CONTROLS[0].CnV = FTM_CnV_VAL(PERIOD / 2);						// Ind D4
+	FTM2->CONTROLS[1].CnV = FTM_CnV_VAL(PERIOD / 2);						// Ind D3
+	FTM2->CONTROLS[2].CnV = FTM_CnV_VAL(PERIOD / 2);						// Ind D2
+	FTM2->CONTROLS[3].CnV = FTM_CnV_VAL(PERIOD / 2);						// Ind D1
 	FTM2->CONTROLS[4].CnV = FTM_CnV_VAL(PERIOD);							// Bkl Park
 	FTM2->CONTROLS[5].CnV = FTM_CnV_VAL(PERIOD);							// Bkl C1 && Ind N2 // DUPLICATE MODULE
 

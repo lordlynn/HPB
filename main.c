@@ -105,6 +105,9 @@ struct btn {
 
 	/** Final debounced button state **/
 	enum state state;
+
+	/** Stores the last state **/
+	enum state last;
 };
 
 void WDOG_disable(void);													// Disables WDT. USED FOR EARLY DEV ONLY. ADD WDT LATER
@@ -135,6 +138,7 @@ int main(void) {
 	init_adc();																// Initializes analog switch pins
 	init_digital_pins();													// Initializes digital swithc pins
 
+	int bkl_off = 0;
 
 	while (1) {
 		if (count % 5 == 0) {
@@ -144,39 +148,79 @@ int main(void) {
 			debounce_btn(&neutral_btn, (PTC->PDIR & (0x1 << 14)));
 			debounce_btn(&drive_btn,   (PTB->PDIR & (0x1 << 0)));
 
-			/** TODO - 5 presses of park button disables backlight **/
 
-			if (park_btn.state == press) {
+			// Check that two buttons are not pushed at the same time
+			if ((park_btn.state == press && reverse_btn.state == press)    ||
+				(park_btn.state == press && neutral_btn.state == press)    ||
+				(park_btn.state == press && drive_btn.state == press)      ||
+				(reverse_btn.state == press && neutral_btn.state == press) ||
+				(reverse_btn.state == press && drive_btn.state == press)   ||
+				(neutral_btn.state == press && drive_btn.state == press)) {
+
+				continue;
+			}
+
+
+			if (park_btn.state == press && park_btn.state != park_btn.last) {
 				enable_LED_park();
-			}
-			else if (park_btn.state == open) {
-				disable_LED_park();
-			}
-
-
-			if (reverse_btn.state == press) {
-				enable_LED_reverse();
-			}
-			else if (reverse_btn.state == open) {
 				disable_LED_reverse();
-			}
-
-
-			if (neutral_btn.state == press) {
-				enable_LED_neutral();
-				printf("NEUTRAL\n");
-			}
-			else if (neutral_btn.state == open) {
 				disable_LED_neutral();
-				printf("OPEN\n");
-			}
-
-
-			if (drive_btn.state == press) {
-				enable_LED_drive();
-			}
-			else if (drive_btn.state == open){
 				disable_LED_drive();
+				printf("PARK\n");
+				bkl_off += 1;
+
+				if (bkl_off >= 10) {
+					bkl_off = 0;
+
+					if ((FTM1->SC & FTM_SC_PWMEN5_MASK) == FTM_SC_PWMEN5_MASK) {	// If bkl pwm ch is enabled, disable bkl
+						disable_bkl();
+					}
+					else {
+						enable_bkl();
+					}
+				}
+			}
+			else if (park_btn.state == open && park_btn.state != park_btn.last) {
+				bkl_off += 1;
+			}
+
+
+			if (reverse_btn.state == press && reverse_btn.state != reverse_btn.last) {
+				disable_LED_park();
+				enable_LED_reverse();
+				disable_LED_neutral();
+				disable_LED_drive();
+
+				bkl_off = 0;
+			}
+			else if (reverse_btn.state == open && reverse_btn.state != reverse_btn.last) {
+				// PASS
+			}
+
+
+			if (neutral_btn.state == press && neutral_btn.state != neutral_btn.last) {
+				disable_LED_park();
+				disable_LED_reverse();
+				enable_LED_neutral();
+				disable_LED_drive();
+
+				bkl_off = 0;
+			}
+			else if (neutral_btn.state == open && neutral_btn.state != neutral_btn.last) {
+				// PASS
+			}
+
+
+			if (drive_btn.state == press && drive_btn.state != drive_btn.last) {
+				disable_LED_park();
+				disable_LED_reverse();
+				disable_LED_neutral();
+				enable_LED_drive();
+
+				bkl_off = 0;
+			}
+			else if (drive_btn.state == open && drive_btn.state != drive_btn.last) {
+				// PASS
 			}
 		}
 	}
@@ -355,7 +399,7 @@ void debounce_analog_contact(struct analog_contact *a) {
 /***********************************************************************
  * Calls the debounce_analog_contact helper function to debounce both
  * 		analog contacts and debounces the digital contact. After
- * 		debouncing the individual contacts, their states are analysed to
+ * 		debouncing the individual contacts, their states are analyzed to
  * 		set the final debounced button state.
  *
  * @param b Pointer to a btn structure
@@ -388,6 +432,7 @@ void debounce_btn(struct btn *b, uint32_t digital_condition) {
 
 	// Determine final debounced state based on the states of the three contacts
 	if (b->A1.state == b->A2.state && b->A1.state == b->D1.state) {
+		b->last = b->state;
 		b->state = b->A1.state;												// If all three states are the same that as the overall button state
 	}
 

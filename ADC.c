@@ -115,7 +115,7 @@ uint16_t read_adc0(uint8_t ch) {
 
 	// Wait for latest conversion to complete
 	while(((ADC0->SC1[0] & ADC_SC1_COCO_MASK) >> ADC_SC1_COCO_SHIFT) == 0);
-	ADC_RawResult = ADC0->R[0];											// Read ADC Data Result A (ADC0_RA)
+	ADC_RawResult = ADC0->R[0];												// Read ADC Data Result A (ADC0_RA)
 	return (ADC_RawResult * 5000) / ((1 << 10) - 1); 						// Convert to mV (@VREFH = 5V)
 }
 
@@ -126,6 +126,6 @@ uint16_t read_adc1(uint8_t ch) {
 
 	// Wait for latest conversion to complete
 	while(((ADC1->SC1[0] & ADC_SC1_COCO_MASK) >> ADC_SC1_COCO_SHIFT) == 0);
-	ADC_RawResult = ADC1->R[0];											// Read ADC Data Result A (ADC0_RA)
+	ADC_RawResult = ADC1->R[0];												// Read ADC Data Result A (ADC0_RA)
 	return (ADC_RawResult * 5000) / ((1 << 10) - 1); 						// Convert to mV (@VREFH = 5V)
 }

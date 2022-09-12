@@ -24,7 +24,6 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="LOGO.png"/></td>
   <td id="projectalign">
    <div id="projectname">Honda Pushbutton<span id="projectnumber">&#160;Phase 1</span>
    </div>
@@ -211,7 +210,7 @@ $(document).ready(function(){initNavTree('_a_d_c_8c_source.html',''); initResiza
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="comment">// Wait for latest conversion to complete</span></div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordflow">while</span>(((ADC0-&gt;SC1[0] &amp; ADC_SC1_COCO_MASK) &gt;&gt; ADC_SC1_COCO_SHIFT) == 0);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    ADC_RawResult = ADC0-&gt;R[0];                                         <span class="comment">// Read ADC Data Result A (ADC0_RA)</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    ADC_RawResult = ADC0-&gt;R[0];                                             <span class="comment">// Read ADC Data Result A (ADC0_RA)</span></div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordflow">return</span> (ADC_RawResult * 5000) / ((1 &lt;&lt; 10) - 1);                        <span class="comment">// Convert to mV (@VREFH = 5V)</span></div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>}</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
@@ -222,7 +221,7 @@ $(document).ready(function(){initNavTree('_a_d_c_8c_source.html',''); initResiza
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="comment">// Wait for latest conversion to complete</span></div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordflow">while</span>(((ADC1-&gt;SC1[0] &amp; ADC_SC1_COCO_MASK) &gt;&gt; ADC_SC1_COCO_SHIFT) == 0);</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    ADC_RawResult = ADC1-&gt;R[0];                                         <span class="comment">// Read ADC Data Result A (ADC0_RA)</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    ADC_RawResult = ADC1-&gt;R[0];                                             <span class="comment">// Read ADC Data Result A (ADC0_RA)</span></div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordflow">return</span> (ADC_RawResult * 5000) / ((1 &lt;&lt; 10) - 1);                        <span class="comment">// Convert to mV (@VREFH = 5V)</span></div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>}</div>
 <div class="ttc" id="a_a_d_c_8c_html_a1a255a0edfde58943f786fa1187dfa1f"><div class="ttname"><a href="_a_d_c_8c.html#a1a255a0edfde58943f786fa1187dfa1f">check_adc</a></div><div class="ttdeci">void check_adc(void)</div><div class="ttdef"><b>Definition:</b> <a href="_a_d_c_8c_source.html#l00051">ADC.c:51</a></div></div>
@@ -235,8 +234,8 @@ $(document).ready(function(){initNavTree('_a_d_c_8c_source.html',''); initResiza
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_55c25a45ee28b691cd54898f34bfedd0.html">HondaPushButton</a></li><li class="navelem"><a class="el" href="dir_c3893ae276e5cbce9d5d0ab0031325f2.html">src</a></li><li class="navelem"><a class="el" href="_a_d_c_8c.html">ADC.c</a></li>
-    <li class="footer">Generated on Fri Sep 9 2022 15:45:10 for Honda Pushbutton by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_a_d_c_8c.html">ADC.c</a></li>
+    <li class="footer">Generated on Mon Sep 12 2022 16:16:58 for Honda Pushbutton by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
   </ul>
 </div>
 </body>
