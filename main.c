@@ -1,6 +1,6 @@
 // ADC Code adapted from https://www.nxp.com/docs/en/application-note/AN12217.pdf
-#include "S32K144.h" 														// Include peripheral declarations S32K144
-#include <stdio.h>															// DEBUG ONLY. INCLUDED FOR PRINTF
+#include "S32K146.h" 														// Include peripheral declarations S32K144
+#include "stdio.h"															// DEBUG ONLY. INCLUDED FOR PRINTF
 #include "TimerInterrupt.h"
 #include "ADC.h"
 #include "LED.h"
@@ -15,6 +15,9 @@
 #define FH 2700
 /** Low end of final voltage range **/
 #define FL 2000
+
+/** Maximum difference between count and btn.time such that two button presses are considered simultaneous. This amount is added to the button debounce time as padding **/
+#define SIMULTANEOUS_BTN_TIME 75
 
 /** Keeps track of the state of individual contacts as well as the overall debounced state for a button **/
 enum state {
@@ -108,15 +111,21 @@ struct btn {
 
 	/** Stores the last state **/
 	enum state last;
+
+	/** Value of count variable at last state change **/
+	uint32_t time;
 };
 
 void WDOG_disable(void);													// Disables WDT. USED FOR EARLY DEV ONLY. ADD WDT LATER
 void init_digital_pins(void);												// Initialize PTC0,14,16 and PTB0 as GPIO inputs with pull up resistors
 void init_btn(struct btn *b, uint8_t ch1, uint8_t adc1,						// Initializes the nested structs
 		      uint8_t ch2, uint8_t adc2);
-
+void enable_button_source(uint8_t en);										// Sets the 5v_GRPx_nEN outputs HIGH using one hot encoded parameter
+void disable_button_source(uint8_t en);										// Sets the 5v_GRPx_nEN outputs LOW using one hot encoded parameter
 void debounce_btn(struct btn *b, uint32_t digital_condition);				// Debounces a button with 2 analog and 1 digital contacts
 void debounce_analog_contact(struct analog_contact *a);						// Helper function for debounce_btn
+void btn_menu(struct btn *park_btn, struct btn *reverse_btn,
+			  struct btn *neutral_btn, struct btn *drive_btn);				// Button menu function updates LEDs and performs actions according to button states
 
 int main(void) {
 	WDOG_disable(); 														// Disable Watchdog
@@ -138,95 +147,210 @@ int main(void) {
 	init_adc();																// Initializes analog switch pins
 	init_digital_pins();													// Initializes digital swithc pins
 
-	int bkl_off = 0;
 
+
+	// On startup have all LEDs off, turn on bkl and park indicator on first btn press
+	enable_button_source(0x7);												// 0x7 enables 5V_GRPx_nEN channels 1-3 to power the buttons
+	disable_bkl();
+	disable_LED_park();
+
+	enable_LED_park();
+	enable_LED_drive();
+
+	set_p1(0);
+	set_p2(99);
+
+	set_d1(0);
+	set_d2(0);
+	set_d3(0);
+	set_d4(50);
+
+
+//	set_bkl_c1(0);
+//	set_bkl_c2(0);
+
+//	enable_LED_neutral();
+//	enable_LED_reverse();
+//	FTM2->SC = FTM_SC_CLKS(1) | FTM_SC_PWMEN5_MASK;
+//	FTM1->SC = FTM_SC_CLKS(1) | FTM_SC_PWMEN5_MASK;
+	int tmp = 0;
 	while (1) {
-		if (count % 5 == 0) {
+		if (count % 250 == 0) {
 
-			debounce_btn(&park_btn,    (PTC->PDIR & (0x1 << 0)));
-			debounce_btn(&reverse_btn, (PTC->PDIR & (0x1 << 16)));
-			debounce_btn(&neutral_btn, (PTC->PDIR & (0x1 << 14)));
-			debounce_btn(&drive_btn,   (PTB->PDIR & (0x1 << 0)));
+//			debounce_btn(&park_btn,    (PTC->PDIR & (0x1 << 0)));
+//			debounce_btn(&reverse_btn, (PTC->PDIR & (0x1 << 16)));
+//			debounce_btn(&neutral_btn, (PTC->PDIR & (0x1 << 14)));
+//			debounce_btn(&drive_btn,   (PTB->PDIR & (0x1 << 0)));
+//
+//			btn_menu(&park_btn, &reverse_btn, &neutral_btn, &drive_btn);
 
-
-			// Check that two buttons are not pushed at the same time
-			if ((park_btn.state == press && reverse_btn.state == press)    ||
-				(park_btn.state == press && neutral_btn.state == press)    ||
-				(park_btn.state == press && drive_btn.state == press)      ||
-				(reverse_btn.state == press && neutral_btn.state == press) ||
-				(reverse_btn.state == press && drive_btn.state == press)   ||
-				(neutral_btn.state == press && drive_btn.state == press)) {
-
-				continue;
-			}
+			check_CAN();
 
 
-			if (park_btn.state == press && park_btn.state != park_btn.last) {
-				enable_LED_park();
-				disable_LED_reverse();
-				disable_LED_neutral();
-				disable_LED_drive();
-
-
-				bkl_off += 1;
-				printf("PARK-%d\n", bkl_off);
-				if (bkl_off >= 10) {
-					bkl_off = 0;
-
-					if ((FTM1->SC & FTM_SC_PWMEN5_MASK) == FTM_SC_PWMEN5_MASK) {	// If bkl pwm ch is enabled, disable bkl
-						disable_bkl();
-					}
-					else {
-						enable_bkl();
-					}
-				}
-			}
-			else if (park_btn.state == open && park_btn.state != park_btn.last) {
-				bkl_off += 1;
-				disable_LED_park();
-			}
-
-
-			if (reverse_btn.state == press && reverse_btn.state != reverse_btn.last) {
-				disable_LED_park();
-				enable_LED_reverse();
-				disable_LED_neutral();
-				disable_LED_drive();
-
-				bkl_off = 0;
-			}
-			else if (reverse_btn.state == open && reverse_btn.state != reverse_btn.last) {
-				// PASS
-			}
-
-
-			if (neutral_btn.state == press && neutral_btn.state != neutral_btn.last) {
-				disable_LED_park();
-				disable_LED_reverse();
-				enable_LED_neutral();
-				disable_LED_drive();
-
-				bkl_off = 0;
-			}
-			else if (neutral_btn.state == open && neutral_btn.state != neutral_btn.last) {
-				// PASS
-			}
-
-
-			if (drive_btn.state == press && drive_btn.state != drive_btn.last) {
-				disable_LED_park();
-				disable_LED_reverse();
-				disable_LED_neutral();
-				enable_LED_drive();
-
-				bkl_off = 0;
-			}
-			else if (drive_btn.state == open && drive_btn.state != drive_btn.last) {
-				// PASS
-			}
+			count++;			// Prevents this loop from iterating multiple times in 1 ms
 		}
 	}
 }
+
+
+
+
+void btn_menu(struct btn *park_btn, struct btn *reverse_btn,
+			  struct btn *neutral_btn, struct btn *drive_btn) {
+	static uint8_t bkl_off = 0;
+
+	static int ISFIRST = 0;			// USED TO CREATE THE WAKE UP FUNCTION. REMOVE AFTER DEMO
+
+	// Check that two buttons are not pushed at the same time
+	if (park_btn->state == press) {
+		if (reverse_btn->state == press) {
+			reverse_btn->last = press;
+			park_btn->last = press;
+		}
+		if (neutral_btn->state == press) {
+			neutral_btn->last = press;
+			park_btn->last = press;
+		}
+		if (drive_btn->state == press) {
+			drive_btn->last = press;
+			park_btn->last = press;
+		}
+	}
+	else if (reverse_btn->state == press) {
+		if (neutral_btn->state == press) {
+			neutral_btn->last = press;
+			reverse_btn->last = press;
+		}
+		if (drive_btn->state == press) {
+			drive_btn->last = press;
+			reverse_btn->last = press;
+		}
+	}
+	else if (drive_btn->state == press) {
+		if (neutral_btn->state == press) {
+			neutral_btn->last = press;
+			drive_btn->last = press;
+		}
+	}
+
+
+	if (park_btn->state == press && park_btn->state != park_btn->last && count - park_btn->time >= SIMULTANEOUS_BTN_TIME) {
+		park_btn->last = park_btn->state;
+
+		// THIS STATEMENT IS USED TO "WAKE UP" ON FIRST BUTTON PRESS
+		if (ISFIRST == 0) {
+			enable_LED_park();
+			disable_LED_reverse();
+			disable_LED_neutral();
+			disable_LED_drive();
+			enable_bkl();
+			ISFIRST = 1;
+			return;
+		}
+
+		enable_LED_park();
+		disable_LED_reverse();
+		disable_LED_neutral();
+		disable_LED_drive();
+
+
+		bkl_off += 1;
+		if (bkl_off >= 5) {
+			bkl_off = 0;
+
+			if ((FTM1->SC & FTM_SC_PWMEN5_MASK) == FTM_SC_PWMEN5_MASK) {	// If bkl pwm ch is enabled, disable bkl
+				disable_bkl();
+			}
+			else {
+				enable_bkl();
+			}
+		}
+	}
+	else if (park_btn->state == open) {
+		park_btn->last = park_btn->state;
+	}
+
+
+	if (reverse_btn->state == press && reverse_btn->state != reverse_btn->last && count - reverse_btn->time >= SIMULTANEOUS_BTN_TIME) {
+		reverse_btn->last = reverse_btn->state;
+
+		// THIS STATEMENT IS USED TO "WAKE UP" ON FIRST BUTTON PRESS
+		if (ISFIRST == 0) {
+			enable_LED_park();
+			disable_LED_reverse();
+			disable_LED_neutral();
+			disable_LED_drive();
+			enable_bkl();
+			ISFIRST = 1;
+			return;
+		}
+
+		disable_LED_park();
+		enable_LED_reverse();
+		disable_LED_neutral();
+		disable_LED_drive();
+
+		bkl_off = 0;
+	}
+	else if (reverse_btn->state == open) {
+		reverse_btn->last = reverse_btn->state;
+	}
+
+	if (neutral_btn->state == press && neutral_btn->state != neutral_btn->last && count - neutral_btn->time >= SIMULTANEOUS_BTN_TIME) {
+		neutral_btn->last = neutral_btn->state;
+
+		// THIS STATEMENT IS USED TO "WAKE UP" ON FIRST BUTTON PRESS
+		if (ISFIRST == 0) {
+			enable_LED_park();
+			disable_LED_reverse();
+			disable_LED_neutral();
+			disable_LED_drive();
+			enable_bkl();
+			ISFIRST = 1;
+			return;
+		}
+
+		disable_LED_park();
+		disable_LED_reverse();
+		enable_LED_neutral();
+		disable_LED_drive();
+
+		bkl_off = 0;
+	}
+	else if (neutral_btn->state == open) {
+		neutral_btn->last = neutral_btn->state;
+	}
+
+
+	if (drive_btn->state == press && drive_btn->state != drive_btn->last && count - drive_btn->time >= SIMULTANEOUS_BTN_TIME) {
+		drive_btn->last = drive_btn->state;
+
+		// THIS STATEMENT IS USED TO "WAKE UP" ON FIRST BUTTON PRESS
+		if (ISFIRST == 0) {
+			enable_LED_park();
+			disable_LED_reverse();
+			disable_LED_neutral();
+			disable_LED_drive();
+			enable_bkl();
+			ISFIRST = 1;
+			return;
+		}
+
+		disable_LED_park();
+		disable_LED_reverse();
+		disable_LED_neutral();
+		enable_LED_drive();
+
+		bkl_off = 0;
+	}
+	else if (drive_btn->state == open) {
+		drive_btn->last = drive_btn->state;
+	}
+}
+
+
+
+
 
 /***********************************************************************
  * Disables the watchdog timer module.
@@ -243,11 +367,14 @@ void WDOG_disable(void) {
 /***********************************************************************
  * Initializes pins PTC0, PTC14, PTC16, PTB0 as GPIO inputs with pull
  * 		up resistors to use for the digital switch in each button.
+ * 		Additionally the 5V_GRPx_nEN pins are initialized here and left
+* 		LOW.
  *
  * @param void
  * @return void
  **********************************************************************/
 void init_digital_pins(void) {
+	// Button pins
 	PCC->PCCn[PCC_PORTC_INDEX] |= 0x40000000;								// Write Clock Gate Control high to allow updating registers
 	PCC->PCCn[PCC_PORTB_INDEX] |= 0x40000000;
 
@@ -260,6 +387,20 @@ void init_digital_pins(void) {
 	// Set Port Data Direction Register for inputs
 	PTB->PDDR &=~ (0x1);
 	PTC->PDDR &=~ ((0x1 << 16) | (0x1 << 14) | 0x1);
+
+	// 5V_GRPx_nEN pins
+	PCC->PCCn[PCC_PORTD_INDEX] |= 0x40000000;
+
+	PORTB->PCR[8] = 0x00000102;												// Sets pins in GPIO mode with pulldown resistor enabled
+	PORTB->PCR[11] = 0x00000102;
+	PORTD->PCR[17] = 0x00000102;
+
+	PTB->PDDR |= (0x1 << 8) | (0x1 << 11);									// Set pins as outputs
+	PTD->PDDR |= (0x1 << 17);
+
+	PTB->PSOR &=~ (0x1 << 8) | (0x1 << 11);									// Set outputs low
+	PTD->PSOR &=~ (0x1 << 17);
+
 }
 
 /***********************************************************************
@@ -277,6 +418,9 @@ void init_btn(struct btn *b, uint8_t ch1, uint8_t adc1,
 		      uint8_t ch2, uint8_t adc2) {
 
 	enum state initial = none;
+	b->time = 0;
+	b->state = initial;
+	b->last = initial;
 
 	struct analog_contact a1 = {0, 0, 0, 0, 0, 0, 0, 0, initial, 0, adc1, ch1};
 	b->A1 = a1;
@@ -286,6 +430,52 @@ void init_btn(struct btn *b, uint8_t ch1, uint8_t adc1,
 
 	struct digital_contact d1 = {0, 0, initial};
 	b->D1 = d1;
+}
+
+/***********************************************************************
+ * Enables the 5V_GRPx_nEN lines which provide 5v to the buttons. The
+ * 		input parameter should use one hot encoding where:
+ * 				0x01 - enables 5V_GRP1_nEN - B11
+ * 				0x02 - enables 5V_GRP2_nEN - B8
+ * 				0x04 - enables 5V_GRP3_nEN - D17
+ *
+ * @param en One hot encoded byte. Bits 0-2 enable outputs 1-3.
+ *
+ * @return void
+ **********************************************************************/
+void enable_button_source(uint8_t en) {
+	if ((en & 0x1) == 0x1) {
+		PTB->PSOR |= (0x1 << 11);
+	}
+	if ((en & 0x2) == 0x2) {
+		PTB->PSOR |= (0x1 << 8);
+	}
+	if ((en & 0x4) == 0x4) {
+		PTD->PSOR |= (0x1 << 17);
+	}
+}
+
+/***********************************************************************
+ * Disables the 5V_GRPx_nEN lines which provide 5v to the buttons. The
+ * 		input parameter should use one hot encoding where:
+ * 				0x01 - disables 5V_GRP1_nEN - B11
+ * 				0x02 - disables 5V_GRP2_nEN - B8
+ * 				0x04 - disables 5V_GRP3_nEN - D17
+ *
+ * @param en One hot encoded byte. Bits 0-2 enable outputs 1-3.
+ *
+ * @return void
+ **********************************************************************/
+void disable_button_source(uint8_t en) {
+	if ((en & 0x1) == 0x1) {
+		PTB->PSOR &=~ (0x1 << 11);
+	}
+	if ((en & 0x2) == 0x2) {
+		PTB->PSOR &=~ (0x1 << 8);
+	}
+	if ((en & 0x4) == 0x4) {
+		PTD->PSOR &=~ (0x1 << 17);
+	}
 }
 
 /***********************************************************************
@@ -433,9 +623,9 @@ void debounce_btn(struct btn *b, uint32_t digital_condition) {
 	}
 
 	// Determine final debounced state based on the states of the three contacts
-	if (b->A1.state == b->A2.state && b->A1.state == b->D1.state) {
-		b->last = b->state;
+	if (b->A1.state == b->A2.state && b->A1.state == b->D1.state && b->state != b->A1.state) {
 		b->state = b->A1.state;												// If all three states are the same that as the overall button state
+		b->time = count;													// Record time of last state change
 	}
 
 //	printf("Analog 1: %d,\tAnalog 2: %d,\tDigital 1: %d\n", b->A1.state, b->A2.state, b->D1.state);   // DEBUG USE ONLY

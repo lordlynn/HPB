@@ -1,6 +1,6 @@
-#include "S32K144.h"
+#include "S32K146.h"
 #include "TimerInterrupt.h"
-#include "fsl_core_cm4.h"
+//#include "fsl_core_cm4.h"
 
 /** Pointer to Systick **/
 #define SysTick ((SysTick_Type *) (0xE000E010UL))
@@ -25,13 +25,13 @@ typedef struct {
 uint32_t count = 0;
 
 void start_systick(double delay) {
-	DISABLE_INTERRUPTS();
+//	DISABLE_INTERRUPTS();
 
 	SysTick->LOAD = delay * 48000; 											// set SysTick timer load value. 48Mhz = 48000 cycles per ms
 
 	SysTick->CTRL = 0x7; 										    		// start SysTick timer with Interrupt using core clock
 
-	ENABLE_INTERRUPTS();
+//	ENABLE_INTERRUPTS();
 
 }
 

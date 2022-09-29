@@ -1,4 +1,4 @@
-#include "S32K144.h" 														// Include peripheral declarations S32K144
+#include "S32K146.h" 														// Include peripheral declarations S32K144
 #include "ADC.h"
 
 #include "stdio.h"
@@ -58,7 +58,7 @@ void check_adc(void) {
 	temp = ADC0->R[0];
 
 	if ((temp & 0x3FF) == 0x3FF) {											// Check that no bits are stuck LOW
-		printf("All ADC bits are HIGH on ADC0\n");
+//		printf("All ADC bits are HIGH on ADC0\n");
 	}
 
 	// Read Vrf LOW
@@ -67,7 +67,7 @@ void check_adc(void) {
 	temp = ADC0->R[0];
 
 	if ((temp & 0x3FF) == 0x000) {											// Check that no bits are stuck HIGH
-		printf("All ADC bits are LOW on ADC0\n");
+//		printf("All ADC bits are LOW on ADC0\n");
 	}
 
 	// Read Bandgap voltage
@@ -76,7 +76,7 @@ void check_adc(void) {
 	temp = ADC0->R[0];
 
 	if ((temp)) {															// Check that no bits are stuck HIGH
-		printf("Bandgap Voltage on ADC0: %d\n", temp * 5000 / ((0x1 << 10) - 1));
+//		printf("Bandgap Voltage on ADC0: %d\n", temp * 5000 / ((0x1 << 10) - 1));
 	}
 
 	/****    ADC1    ****/
@@ -86,7 +86,7 @@ void check_adc(void) {
 	temp = ADC1->R[0];
 
 	if ((temp & 0x3FF) == 0x3FF) {											// Check that no bits are stuck LOW
-		printf("All ADC bits are HIGH on ADC1\n");
+//		printf("All ADC bits are HIGH on ADC1\n");
 	}
 
 	// Read Vrf LOW
@@ -95,7 +95,7 @@ void check_adc(void) {
 	temp = ADC1->R[0];
 
 	if ((temp & 0x3FF) == 0x000) {											// Check that no bits are stuck HIGH
-		printf("All ADC bits are LOW on ADC1\n");
+//		printf("All ADC bits are LOW on ADC1\n");
 	}
 
 	// Read Bandgap voltage
@@ -104,7 +104,7 @@ void check_adc(void) {
 	temp = ADC1->R[0];
 
 	if ((temp)) {															// Check that no bits are stuck HIGH
-		printf("Bandgap Voltage on ADC1: %d\n", temp * 5000 / ((0x1 << 10) - 1));
+//		printf("Bandgap Voltage on ADC1: %d\n", temp * 5000 / ((0x1 << 10) - 1));
 	}
 }
 
