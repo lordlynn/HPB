@@ -21,7 +21,6 @@ typedef struct {
 
 } SysTick_Type;
 
-
 /** How many Systick interrupts have happened since startup **/
 uint32_t count = 0;
 

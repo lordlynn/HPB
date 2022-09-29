@@ -166,9 +166,10 @@ int main(void) {
 				disable_LED_reverse();
 				disable_LED_neutral();
 				disable_LED_drive();
-				printf("PARK\n");
-				bkl_off += 1;
 
+
+				bkl_off += 1;
+				printf("PARK-%d\n", bkl_off);
 				if (bkl_off >= 10) {
 					bkl_off = 0;
 
@@ -182,6 +183,7 @@ int main(void) {
 			}
 			else if (park_btn.state == open && park_btn.state != park_btn.last) {
 				bkl_off += 1;
+				disable_LED_park();
 			}
 
 
