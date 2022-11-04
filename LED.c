@@ -5,8 +5,8 @@
 //#include "fsl_core_cm4.h"
 #include "LED.h"
 
-#define PERIOD (48000 - 1)													// clk = 48MHz so, 48000 cycles = 1kHz
-#define DC_INIT 40000
+#define PERIOD (30000 - 1)													// clk = 48MHz/16 = 3Mhz so, 3333 cycles = 100Hz
+#define DC_INIT 15000
 
 void PWM_init() {
 	/****  Enable clock on ports  *****/
@@ -33,7 +33,8 @@ void PWM_init() {
 	PORTB->PCR[17] = PORT_PCR_MUX(2); 										// FTM0, Channel5
 
 	/****  Select output pins from PORTC  ****/
-	PORTC->PCR[10] = PORT_PCR_MUX(2); 										// FTM3, Channel4
+	PORTC->PCR[10] = PORT_PCR_MUX(2); 										// FTM3, Channel4      enable pull down reistor
+
 	PORTC->PCR[13] = PORT_PCR_MUX(2); 										// FTM3, Channel7
 
 	/****  Select output pins from PORTD  ****/
@@ -48,7 +49,7 @@ void PWM_init() {
 
 	/****  Select output pins from PORTD  ****/
 	PORTE->PCR[9] = PORT_PCR_MUX(2); 										// FTM0, Channel7
-	PORTE->PCR[11] = PORT_PCR_MUX(4); 										// FTM2, Channel5, Mode 4 not typ. ** DUPLICATE OUTPUT CH, SEE PTD14
+//	PORTE->PCR[11] = PORT_PCR_MUX(4); 										// FTM2, Channel5, Mode 4 not typ. ** DUPLICATE OUTPUT CH, SEE PTD14 // DISABLES C1
 	PORTE->PCR[13] = PORT_PCR_MUX(2); 										// FTM4, CH5  ** FTM4 DOES NOT EXIST ON THE DEV BOARD
 
 	/****  Enable registers updating from write buffers  ****/
@@ -125,17 +126,17 @@ void PWM_init() {
 	FTM3->CNT = 0;
 	FTM4->CNT = 0;															// NO FTM4 MODULE
 
-	/****  Clock selection (core clk) and enable PWM generation  ****/
+	/****  Clock selection (core clk) divdied by 16 and enable PWM generation  ****/
 	/* On startup, only enable the backlights and park indicator */
-	FTM0->SC = FTM_SC_CLKS(1) | FTM_SC_PWMEN2_MASK | FTM_SC_PWMEN3_MASK;
+	FTM0->SC = FTM_SC_CLKS(1) | FTM_SC_PS(4); // | FTM_SC_PWMEN2_MASK | FTM_SC_PWMEN3_MASK; // Enables park indicators
 
-	FTM1->SC = FTM_SC_CLKS(1) | FTM_SC_PWMEN5_MASK;
+	FTM1->SC = FTM_SC_CLKS(1) | FTM_SC_PS(4); // | FTM_SC_PWMEN5_MASK;
 
-	FTM2->SC = FTM_SC_CLKS(1) | FTM_SC_PWMEN4_MASK | FTM_SC_PWMEN5_MASK;
+	FTM2->SC = FTM_SC_CLKS(1) | FTM_SC_PS(4); // | FTM_SC_PWMEN4_MASK; // | FTM_SC_PWMEN5_MASK; // DISABLES C1
 
-	FTM3->SC = FTM_SC_CLKS(1) | FTM_SC_PWMEN4_MASK | FTM_SC_PWMEN7_MASK;
+	FTM3->SC = FTM_SC_CLKS(1) | FTM_SC_PS(4); // | FTM_SC_PWMEN4_MASK | FTM_SC_PWMEN7_MASK;
 
-	FTM4->SC = FTM_SC_CLKS(1) | FTM_SC_PWMEN5_MASK;							// NO FTM4 MODULE
+	FTM4->SC = FTM_SC_CLKS(1) | FTM_SC_PS(4); // | FTM_SC_PWMEN5_MASK;							// NO FTM4 MODULE
 }
 
 
@@ -173,14 +174,14 @@ void disable_LED_drive(void) {
 
 void enable_bkl(void) {
 	FTM1->SC |= FTM_SC_PWMEN5_MASK;
-	FTM2->SC |= FTM_SC_PWMEN4_MASK | FTM_SC_PWMEN5_MASK;
+	FTM2->SC |= FTM_SC_PWMEN4_MASK; // | FTM_SC_PWMEN5_MASK;		// DISABLES C1
 	FTM3->SC |= FTM_SC_PWMEN4_MASK | FTM_SC_PWMEN7_MASK;
 	FTM4->SC |= FTM_SC_PWMEN5_MASK; 											// NO FTM4 MODULE ON DEV BOARD
 }
 
 void disable_bkl(void) {
 	FTM1->SC &=~ FTM_SC_PWMEN5_MASK;
-	FTM2->SC &=~ (FTM_SC_PWMEN4_MASK | FTM_SC_PWMEN5_MASK);
+	FTM2->SC &=~ (FTM_SC_PWMEN4_MASK);// | FTM_SC_PWMEN5_MASK);		// DISABLES C1
 	FTM3->SC &=~ (FTM_SC_PWMEN4_MASK | FTM_SC_PWMEN7_MASK);
 	FTM4->SC &=~ FTM_SC_PWMEN5_MASK; 											// NO FTM4 MODULE ON DEV BOARD
 }
@@ -297,11 +298,12 @@ void set_bkl_d(uint8_t brightness) {
 }
 
 void set_bkl_c1(uint8_t brightness) {
-	FTM2->SC &=~ FTM_SC_CLKS(1);
-
-	FTM2->CONTROLS[5].CnV = FTM_CnV_VAL(PERIOD * ((float)brightness / 100.0));
-
-	FTM2->SC |= FTM_SC_CLKS(1);
+	// C1 IS DISABLED UNTIL NEW FTM CH CAN BE SELECTED FOR IT
+//	FTM2->SC &=~ FTM_SC_CLKS(1);
+//
+//	FTM2->CONTROLS[5].CnV = FTM_CnV_VAL(PERIOD * ((float)brightness / 100.0));
+//
+//	FTM2->SC |= FTM_SC_CLKS(1);
 }
 void set_bkl_c2(uint8_t brightness) {
 	FTM1->SC &=~ FTM_SC_CLKS(1);

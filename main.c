@@ -151,49 +151,36 @@ int main(void) {
 
 	// On startup have all LEDs off, turn on bkl and park indicator on first btn press
 	enable_button_source(0x7);												// 0x7 enables 5V_GRPx_nEN channels 1-3 to power the buttons
-	disable_bkl();
-	disable_LED_park();
 
-	enable_LED_park();
-	enable_LED_drive();
+	// Set backlight intensity
+	set_bkl_c1(50);
+	set_bkl_c2(50);
+	set_bkl_p(99);
+	set_bkl_r(99);
+	set_bkl_n(99);
+	set_bkl_d(20);
 
-	set_p1(0);
-	set_p2(99);
+	// Set indicator intensity
+	set_p1(13);
+	set_p2(13);
+	set_r1(11);
+	set_r2(11);
+	set_n1(13);
+	set_n2(13);
 
-	set_d1(0);
-	set_d2(0);
-	set_d3(0);
-	set_d4(50);
-
-
-//	set_bkl_c1(0);
-//	set_bkl_c2(0);
-
-//	enable_LED_neutral();
-//	enable_LED_reverse();
-//	FTM2->SC = FTM_SC_CLKS(1) | FTM_SC_PWMEN5_MASK;
-//	FTM1->SC = FTM_SC_CLKS(1) | FTM_SC_PWMEN5_MASK;
-	int tmp = 0;
 	while (1) {
-		if (count % 250 == 0) {
+		if (count % 5 == 0) {
 
-//			debounce_btn(&park_btn,    (PTC->PDIR & (0x1 << 0)));
-//			debounce_btn(&reverse_btn, (PTC->PDIR & (0x1 << 16)));
-//			debounce_btn(&neutral_btn, (PTC->PDIR & (0x1 << 14)));
-//			debounce_btn(&drive_btn,   (PTB->PDIR & (0x1 << 0)));
-//
-//			btn_menu(&park_btn, &reverse_btn, &neutral_btn, &drive_btn);
+			debounce_btn(&park_btn,    (PTC->PDIR & (0x1 << 0)));
+			debounce_btn(&reverse_btn, (PTC->PDIR & (0x1 << 16)));
+			debounce_btn(&neutral_btn, (PTC->PDIR & (0x1 << 14)));
+			debounce_btn(&drive_btn,   (PTB->PDIR & (0x1 << 0)));
 
-			check_CAN();
+			btn_menu(&park_btn, &reverse_btn, &neutral_btn, &drive_btn);
 
-
-			count++;			// Prevents this loop from iterating multiple times in 1 ms
 		}
 	}
 }
-
-
-
 
 void btn_menu(struct btn *park_btn, struct btn *reverse_btn,
 			  struct btn *neutral_btn, struct btn *drive_btn) {
@@ -240,9 +227,6 @@ void btn_menu(struct btn *park_btn, struct btn *reverse_btn,
 		// THIS STATEMENT IS USED TO "WAKE UP" ON FIRST BUTTON PRESS
 		if (ISFIRST == 0) {
 			enable_LED_park();
-			disable_LED_reverse();
-			disable_LED_neutral();
-			disable_LED_drive();
 			enable_bkl();
 			ISFIRST = 1;
 			return;
@@ -277,9 +261,6 @@ void btn_menu(struct btn *park_btn, struct btn *reverse_btn,
 		// THIS STATEMENT IS USED TO "WAKE UP" ON FIRST BUTTON PRESS
 		if (ISFIRST == 0) {
 			enable_LED_park();
-			disable_LED_reverse();
-			disable_LED_neutral();
-			disable_LED_drive();
 			enable_bkl();
 			ISFIRST = 1;
 			return;
@@ -302,9 +283,6 @@ void btn_menu(struct btn *park_btn, struct btn *reverse_btn,
 		// THIS STATEMENT IS USED TO "WAKE UP" ON FIRST BUTTON PRESS
 		if (ISFIRST == 0) {
 			enable_LED_park();
-			disable_LED_reverse();
-			disable_LED_neutral();
-			disable_LED_drive();
 			enable_bkl();
 			ISFIRST = 1;
 			return;
@@ -328,9 +306,6 @@ void btn_menu(struct btn *park_btn, struct btn *reverse_btn,
 		// THIS STATEMENT IS USED TO "WAKE UP" ON FIRST BUTTON PRESS
 		if (ISFIRST == 0) {
 			enable_LED_park();
-			disable_LED_reverse();
-			disable_LED_neutral();
-			disable_LED_drive();
 			enable_bkl();
 			ISFIRST = 1;
 			return;
@@ -347,10 +322,6 @@ void btn_menu(struct btn *park_btn, struct btn *reverse_btn,
 		drive_btn->last = drive_btn->state;
 	}
 }
-
-
-
-
 
 /***********************************************************************
  * Disables the watchdog timer module.
@@ -623,11 +594,21 @@ void debounce_btn(struct btn *b, uint32_t digital_condition) {
 	}
 
 	// Determine final debounced state based on the states of the three contacts
-	if (b->A1.state == b->A2.state && b->A1.state == b->D1.state && b->state != b->A1.state) {
-		b->state = b->A1.state;												// If all three states are the same that as the overall button state
-		b->time = count;													// Record time of last state change
+	// -- code that requires just one contact in order to change states
+	if ((b->A1.state == press || b->A2.state == press || b->D1.state == press) && (b->state != press)) {
+		b->state = press;
+		b->time = count;
+	}
+	else if (b->A1.state == open && b->A2.state == open && b->D1.state == open && b->state != open) {
+		b->state = open;
+		b->time = count;
 	}
 
-//	printf("Analog 1: %d,\tAnalog 2: %d,\tDigital 1: %d\n", b->A1.state, b->A2.state, b->D1.state);   // DEBUG USE ONLY
+// -- Code that requires all three contacts in agreement
+//	if (b->A1.state == b->A2.state && b->A1.state == b->D1.state && b->state != b->A1.state) {
+//		b->state = b->A1.state;												// If all three states are the same that as the overall button state
+//		b->time = count;													// Record time of last state change
+//	}
+
 
 }

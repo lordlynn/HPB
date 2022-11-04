@@ -4,7 +4,6 @@
 #include "stdio.h"
 
 
-
 void init_adc(void) {
 	SCG->FIRCDIV = SCG_FIRCDIV_FIRCDIV2(4); 								// FIRCDIV2 = 4: FIRCDIV2 divide by 8
 
@@ -50,6 +49,7 @@ void init_adc(void) {
 
 void check_adc(void) {
 	uint16_t temp = 0;
+	// TODO - REPORT ERRORS OVER CAN
 
 	/****    ADC0    ****/
 	// Read Vref HIGH
