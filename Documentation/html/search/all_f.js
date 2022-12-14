@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['time_0',['time',['../structanalog__contact.html#ae73654f333e4363463ad8c594eca1905',1,'analog_contact::time()'],['../structdigital__contact.html#ae73654f333e4363463ad8c594eca1905',1,'digital_contact::time()']]],
+  ['time_0',['time',['../structanalog__contact.html#ae73654f333e4363463ad8c594eca1905',1,'analog_contact::time()'],['../structdigital__contact.html#ae73654f333e4363463ad8c594eca1905',1,'digital_contact::time()'],['../structbtn.html#ae73654f333e4363463ad8c594eca1905',1,'btn::time()']]],
   ['timerinterrupt_2ec_1',['TimerInterrupt.c',['../_timer_interrupt_8c.html',1,'']]],
   ['timerinterrupt_2eh_2',['TimerInterrupt.h',['../_timer_interrupt_8h.html',1,'']]],
   ['todo_20list_3',['Todo List',['../todo.html',1,'']]],

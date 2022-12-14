@@ -6,5 +6,6 @@ var searchData=
   ['init_5fbtn_3',['init_btn',['../main_8c.html#a95ce839fef6f271f20df6fee0296166e',1,'main.c']]],
   ['init_5fdigital_5fpins_4',['init_digital_pins',['../main_8c.html#ac89436039b9fd20905fa1a367899e0cb',1,'main.c']]],
   ['invalid_5fhigh_5',['invalid_high',['../structanalog__contact.html#ab605cc4512c02ca5cd696874699d61e4',1,'analog_contact']]],
-  ['invalid_5flow_6',['invalid_low',['../structanalog__contact.html#a8c306662570daff2a60ebae4e276fa00',1,'analog_contact']]]
+  ['invalid_5flow_6',['invalid_low',['../structanalog__contact.html#a8c306662570daff2a60ebae4e276fa00',1,'analog_contact']]],
+  ['is_5fvalid_5fpress_7',['is_valid_press',['../main_8c.html#a72d52eefdd4cb6b7ceb63732626c9d7a',1,'main.c']]]
 ];

@@ -24,8 +24,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="LOGO.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Honda Pushbutton<span id="projectnumber">&#160;Phase 1</span>
+   <div id="projectname">Honda Pushbutton<span id="projectnumber">&#160;Phase 2</span>
    </div>
    <div id="projectbrief">Written for Honda Pushbutton Demo using S32k146-LQFP100</div>
   </td>
@@ -116,6 +117,8 @@ Data Fields</h2></td></tr>
 <tr class="separator:a7991304dd41a09282f75d2bde0f5eb95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae46fa826922026dc66e5590c1c41732f"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="main_8c.html#adc6e5733fc3c22f0a7b2914188c49c90">state</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structanalog__contact.html#ae46fa826922026dc66e5590c1c41732f">state</a></td></tr>
 <tr class="separator:ae46fa826922026dc66e5590c1c41732f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e84682150888ae78b9a41959ca02c7b"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structanalog__contact.html#a8e84682150888ae78b9a41959ca02c7b">voltage</a></td></tr>
+<tr class="separator:a8e84682150888ae78b9a41959ca02c7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae73654f333e4363463ad8c594eca1905"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structanalog__contact.html#ae73654f333e4363463ad8c594eca1905">time</a></td></tr>
 <tr class="separator:ae73654f333e4363463ad8c594eca1905"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fbafe57399ae24181ee61a3159c2ff1"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structanalog__contact.html#a8fbafe57399ae24181ee61a3159c2ff1">adc</a></td></tr>
@@ -126,7 +129,7 @@ Data Fields</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Holds variables used to track analog contact debouncing </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00041">41</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00060">60</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a id="a8fbafe57399ae24181ee61a3159c2ff1" name="a8fbafe57399ae24181ee61a3159c2ff1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8fbafe57399ae24181ee61a3159c2ff1">&#9670;&#160;</a></span>adc</h2>
@@ -141,7 +144,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p >Which ADC module to use (0 or 1) </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00073">73</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00095">95</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
 
 </div>
 </div>
@@ -158,7 +161,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p >ADC CH to read </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00076">76</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00098">98</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
 
 </div>
 </div>
@@ -175,7 +178,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p >Tracks how many samples have been read for 16/20 sample req </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00046">46</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00065">65</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
 
 </div>
 </div>
@@ -192,7 +195,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p >Tracks invalid high voltages </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00043">43</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00062">62</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
 
 </div>
 </div>
@@ -209,7 +212,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p >Tracks invalid low voltages </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00049">49</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00068">68</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
 
 </div>
 </div>
@@ -226,7 +229,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p >Tracks how many samples have been read for 16/20 sample req </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00052">52</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00071">71</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
 
 </div>
 </div>
@@ -243,7 +246,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p >Tracks final voltages (closed) </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00055">55</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00074">74</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
 
 </div>
 </div>
@@ -260,7 +263,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p >Debounced state of contact </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00067">67</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00086">86</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
 
 </div>
 </div>
@@ -277,7 +280,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p >Value of count variable at last state change. Used for contact timing </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00070">70</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00092">92</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
 
 </div>
 </div>
@@ -294,7 +297,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p >Tracks transitional voltages </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00061">61</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00080">80</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
 
 </div>
 </div>
@@ -311,7 +314,7 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p >Tracks how many samples have been read for 2000/2500 sample requirement </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00064">64</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00083">83</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
 
 </div>
 </div>
@@ -328,12 +331,29 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 <p >Tracks initial voltages (open) </p>
 
-<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00058">58</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00077">77</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a8e84682150888ae78b9a41959ca02c7b" name="a8e84682150888ae78b9a41959ca02c7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e84682150888ae78b9a41959ca02c7b">&#9670;&#160;</a></span>voltage</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t voltage</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Stores the most recent voltage reading </p>
+
+<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00089">89</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>C:/Users/lynnz/OneDrive - JSJ Corporation/Documents/NXPdev/HondaPushButton/src/<a class="el" href="main_8c_source.html">main.c</a></li>
+<li>C:/Users/lynnz/Workspace2.0/HBP_Deploy/src/<a class="el" href="main_8c_source.html">main.c</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -341,7 +361,7 @@ Data Fields</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structanalog__contact.html">analog_contact</a></li>
-    <li class="footer">Generated on Mon Sep 12 2022 16:16:58 for Honda Pushbutton by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+    <li class="footer">Generated on Wed Dec 14 2022 16:30:16 for Honda Pushbutton by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
   </ul>
 </div>
 </body>

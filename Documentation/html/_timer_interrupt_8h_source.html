@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Honda Pushbutton: C:/Users/lynnz/OneDrive - JSJ Corporation/Documents/NXPdev/HondaPushButton/src/TimerInterrupt.h Source File</title>
+<title>Honda Pushbutton: C:/Users/lynnz/Workspace2.0/HBP_Deploy/src/TimerInterrupt.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -24,8 +24,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="LOGO.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Honda Pushbutton<span id="projectnumber">&#160;Phase 1</span>
+   <div id="projectname">Honda Pushbutton<span id="projectnumber">&#160;Phase 2</span>
    </div>
    <div id="projectbrief">Written for Honda Pushbutton Demo using S32k146-LQFP100</div>
   </td>
@@ -93,24 +94,27 @@ $(document).ready(function(){initNavTree('_timer_interrupt_8h_source.html',''); 
   <div class="headertitle"><div class="title">TimerInterrupt.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="_timer_interrupt_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef TIMERINTERRUPT_H_</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define TIMERINTERRUPT_H_</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">extern</span> uint32_t <a class="code hl_variable" href="_timer_interrupt_8h.html#a86988a65e0d3ece7990c032c159786d6">count</a>;</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keywordtype">void</span> <a class="code hl_function" href="_timer_interrupt_8h.html#a66891ea31c3ef51a327b82d8259e3154">start_systick</a>(<span class="keywordtype">double</span> delay);</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#endif                                                                      </span><span class="comment">/* TIMERINTERRUPT_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="a_timer_interrupt_8h_html_a66891ea31c3ef51a327b82d8259e3154"><div class="ttname"><a href="_timer_interrupt_8h.html#a66891ea31c3ef51a327b82d8259e3154">start_systick</a></div><div class="ttdeci">void start_systick(double delay)</div><div class="ttdef"><b>Definition:</b> <a href="_timer_interrupt_8c_source.html#l00028">TimerInterrupt.c:28</a></div></div>
-<div class="ttc" id="a_timer_interrupt_8h_html_a86988a65e0d3ece7990c032c159786d6"><div class="ttname"><a href="_timer_interrupt_8h.html#a86988a65e0d3ece7990c032c159786d6">count</a></div><div class="ttdeci">uint32_t count</div><div class="ttdef"><b>Definition:</b> <a href="_timer_interrupt_8c_source.html#l00026">TimerInterrupt.c:26</a></div></div>
+<a href="_timer_interrupt_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifndef TIMERINTERRUPT_H_</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define TIMERINTERRUPT_H_</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">extern</span> uint32_t <a class="code hl_variable" href="_timer_interrupt_8h.html#a5b66b314af77147a5b8eb1e44498839e">millis</a>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">void</span> <a class="code hl_function" href="_timer_interrupt_8h.html#a66891ea31c3ef51a327b82d8259e3154">start_systick</a>(<span class="keywordtype">double</span> delay);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#endif                                                                      </span><span class="comment">/* TIMERINTERRUPT_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="a_timer_interrupt_8h_html_a5b66b314af77147a5b8eb1e44498839e"><div class="ttname"><a href="_timer_interrupt_8h.html#a5b66b314af77147a5b8eb1e44498839e">millis</a></div><div class="ttdeci">uint32_t millis</div><div class="ttdef"><b>Definition:</b> <a href="_timer_interrupt_8c_source.html#l00026">TimerInterrupt.c:26</a></div></div>
+<div class="ttc" id="a_timer_interrupt_8h_html_a66891ea31c3ef51a327b82d8259e3154"><div class="ttname"><a href="_timer_interrupt_8h.html#a66891ea31c3ef51a327b82d8259e3154">start_systick</a></div><div class="ttdeci">void start_systick(double delay)</div><div class="ttdef"><b>Definition:</b> <a href="_timer_interrupt_8c_source.html#l00029">TimerInterrupt.c:29</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_timer_interrupt_8h.html">TimerInterrupt.h</a></li>
-    <li class="footer">Generated on Mon Sep 12 2022 16:16:58 for Honda Pushbutton by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+    <li class="footer">Generated on Wed Dec 14 2022 16:30:16 for Honda Pushbutton by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
   </ul>
 </div>
 </body>

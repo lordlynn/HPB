@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dl_0',['DL',['../main_8c.html#a7c70057f4ac04e167029eef16e7bb770',1,'main.c']]]
+  ['btn_5ftimeout_0',['BTN_TIMEOUT',['../main_8c.html#ad3ac31d8cdc4a852fb8fa3a239121b10',1,'main.c']]]
 ];

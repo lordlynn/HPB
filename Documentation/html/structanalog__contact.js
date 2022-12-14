@@ -11,5 +11,6 @@ var structanalog__contact =
     [ "time", "structanalog__contact.html#ae73654f333e4363463ad8c594eca1905", null ],
     [ "transition", "structanalog__contact.html#a7908b7bb7142dea9da05fcd0a04dce1c", null ],
     [ "transition_count", "structanalog__contact.html#a7991304dd41a09282f75d2bde0f5eb95", null ],
-    [ "unpress", "structanalog__contact.html#a297803dc186979b94e45f75a1669edf1", null ]
+    [ "unpress", "structanalog__contact.html#a297803dc186979b94e45f75a1669edf1", null ],
+    [ "voltage", "structanalog__contact.html#a8e84682150888ae78b9a41959ca02c7b", null ]
 ];

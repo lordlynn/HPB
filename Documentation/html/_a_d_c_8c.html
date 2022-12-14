@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Honda Pushbutton: C:/Users/lynnz/OneDrive - JSJ Corporation/Documents/NXPdev/HondaPushButton/src/ADC.c File Reference</title>
+<title>Honda Pushbutton: C:/Users/lynnz/Workspace2.0/HBP_Deploy/src/ADC.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -24,8 +24,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="LOGO.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Honda Pushbutton<span id="projectnumber">&#160;Phase 1</span>
+   <div id="projectname">Honda Pushbutton<span id="projectnumber">&#160;Phase 2</span>
    </div>
    <div id="projectbrief">Written for Honda Pushbutton Demo using S32k146-LQFP100</div>
   </td>
@@ -95,9 +96,10 @@ $(document).ready(function(){initNavTree('_a_d_c_8c.html',''); initResizable(); 
   <div class="headertitle"><div class="title">ADC.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;S32K144.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;S32K146.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="_a_d_c_8h_source.html">ADC.h</a>&quot;</code><br />
-<code>#include &quot;stdio.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="_c_a_n_8h_source.html">CAN.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_timer_interrupt_8h_source.html">TimerInterrupt.h</a>&quot;</code><br />
 </div>
 <p><a href="_a_d_c_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -137,7 +139,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_c_8c_source.html#l00051">51</a> of file <a class="el" href="_a_d_c_8c_source.html">ADC.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_c_8c_source.html#l00049">49</a> of file <a class="el" href="_a_d_c_8c_source.html">ADC.c</a>.</p>
 
 </div>
 </div>
@@ -156,7 +158,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Initializes ADC input channels and call check_adc function. ADC is initialized in 10-bit mode.</p>
+<p >This code initializes ADC0 and ADC1 and checks that no bits are stuck high or low. This code also contains functions to read voltages using both ADC modules.</p>
+<p >Author: Zac Lynn Version: Phase2.1 See: <a href="https://www.nxp.com/docs/en/application-note/AN12217.pdf">https://www.nxp.com/docs/en/application-note/AN12217.pdf</a> Initializes ADC input channels and call check_adc function. ADC is initialized in 10-bit mode.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">void</td><td></td></tr>
@@ -166,7 +169,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>void</dd></dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Determine if ADCs should be in 10 or 12 bit mode</dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_c_8c_source.html#l00008">8</a> of file <a class="el" href="_a_d_c_8c_source.html">ADC.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_c_8c_source.html#l00006">6</a> of file <a class="el" href="_a_d_c_8c_source.html">ADC.c</a>.</p>
 
 </div>
 </div>
@@ -194,7 +197,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Voltage reading in mV as an integer </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_c_8c_source.html#l00111">111</a> of file <a class="el" href="_a_d_c_8c_source.html">ADC.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_c_8c_source.html#l00141">141</a> of file <a class="el" href="_a_d_c_8c_source.html">ADC.c</a>.</p>
 
 </div>
 </div>
@@ -222,7 +225,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Voltage reading in mV as an integer </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_a_d_c_8c_source.html#l00122">122</a> of file <a class="el" href="_a_d_c_8c_source.html">ADC.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_d_c_8c_source.html#l00151">151</a> of file <a class="el" href="_a_d_c_8c_source.html">ADC.c</a>.</p>
 
 </div>
 </div>
@@ -232,7 +235,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_a_d_c_8c.html">ADC.c</a></li>
-    <li class="footer">Generated on Mon Sep 12 2022 16:16:58 for Honda Pushbutton by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+    <li class="footer">Generated on Wed Dec 14 2022 16:30:16 for Honda Pushbutton by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
   </ul>
 </div>
 </body>

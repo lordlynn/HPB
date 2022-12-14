@@ -1,3 +1,12 @@
+/***********************************************************************
+ * This code implements phase 2 of HPB prototype. Buttons, LEDs, and CAN
+ * 	functionality have been implemented.
+ *
+ * Author:  Zac Lynn
+ * Version: Phase2.1
+ * See:     https://www.nxp.com/docs/en/application-note/AN5303.pdf
+ **********************************************************************/
+
 #ifndef LED_H_
 #define LED_H_
 
@@ -10,6 +19,18 @@
  **********************************************************************/
 void PWM_init(void);
 
+
+/***********************************************************************
+ * Decodes a CAN message into its corresponding LED command.
+ *
+ * @param unsigned char data us a byte array received from CAN
+ * @param uint32_t id stores the type of commmand
+ * @return uint8_t which is false if no LEDs were chnaged and true if
+ * 						LED settings were udated
+ **********************************************************************/
+uint8_t LED_controls(unsigned char data[], uint32_t id);
+
+
 /***********************************************************************
  * Enables FTMn output channels for the park indicators.
  *
@@ -17,6 +38,7 @@ void PWM_init(void);
  * @return void
  **********************************************************************/
 void enable_LED_park(void);
+
 
 /***********************************************************************
  * Disables FTMn output channels for the park indicators.
@@ -26,6 +48,7 @@ void enable_LED_park(void);
  **********************************************************************/
 void disable_LED_park(void);
 
+
 /***********************************************************************
  * Enables FTMn output channels for the reverse indicators.
  *
@@ -33,6 +56,7 @@ void disable_LED_park(void);
  * @return void
  **********************************************************************/
 void enable_LED_reverse(void);
+
 
 /***********************************************************************
  * Disables FTMn output channels for the reverse indicators.
@@ -42,6 +66,7 @@ void enable_LED_reverse(void);
  **********************************************************************/
 void disable_LED_reverse(void);
 
+
 /***********************************************************************
  * Enables FTMn output channels for the neutral indicators.
  *
@@ -49,6 +74,7 @@ void disable_LED_reverse(void);
  * @return void
  **********************************************************************/
 void enable_LED_neutral(void);
+
 
 /***********************************************************************
  * Disables FTMn output channels for the neutral indicators.
@@ -58,6 +84,7 @@ void enable_LED_neutral(void);
  **********************************************************************/
 void disable_LED_neutral(void);
 
+
 /***********************************************************************
  * Enables FTMn output channels for the drive indicators.
  *
@@ -65,6 +92,7 @@ void disable_LED_neutral(void);
  * @return void
  **********************************************************************/
 void enable_LED_drive(void);
+
 
 /***********************************************************************
  * Disables FTMn output channels for the drive indicators.
@@ -74,6 +102,7 @@ void enable_LED_drive(void);
  **********************************************************************/
 void disable_LED_drive(void);
 
+
 /***********************************************************************
  * Enables FTMn output channels for the backlights.
  *
@@ -82,6 +111,7 @@ void disable_LED_drive(void);
  **********************************************************************/
 void enable_bkl(void);
 
+
 /***********************************************************************
  * Disables FTMn output channels for the backlights.
  *
@@ -89,6 +119,7 @@ void enable_bkl(void);
  * @return void
  **********************************************************************/
 void disable_bkl(void);
+
 
 /***********************************************************************
  * Sets the duty cycle for parking indicator 1 as a percentage of the
@@ -100,6 +131,7 @@ void disable_bkl(void);
  **********************************************************************/
 void set_p1(uint8_t brightness);
 
+
 /***********************************************************************
  * Sets the duty cycle for parking indicator 2 as a percentage of the
  * 		PWM period. Used to dim/calibrate LEDs.
@@ -109,6 +141,7 @@ void set_p1(uint8_t brightness);
  * @return void
  **********************************************************************/
 void set_p2(uint8_t brightness);
+
 
 /***********************************************************************
  * Sets the duty cycle for reverse indicator 1 as a percentage of the
@@ -120,6 +153,7 @@ void set_p2(uint8_t brightness);
  **********************************************************************/
 void set_r1(uint8_t brightness);
 
+
 /***********************************************************************
  * Sets the duty cycle for reverse indicator 2 as a percentage of the
  * 		PWM period. Used to dim/calibrate LEDs.
@@ -129,6 +163,7 @@ void set_r1(uint8_t brightness);
  * @return void
  **********************************************************************/
 void set_r2(uint8_t brightness);
+
 
 /***********************************************************************
  * Sets the duty cycle for neutral indicator 1 as a percentage of the
@@ -140,6 +175,7 @@ void set_r2(uint8_t brightness);
  **********************************************************************/
 void set_n1(uint8_t brightness);
 
+
 /***********************************************************************
  * Sets the duty cycle for neutral indicator 2 as a percentage of the
  * 		PWM period. Used to dim/calibrate LEDs.
@@ -149,6 +185,7 @@ void set_n1(uint8_t brightness);
  * @return void
  **********************************************************************/
 void set_n2(uint8_t brightness);
+
 
 /***********************************************************************
  * Sets the duty cycle for drive indicator 1 as a percentage of the PWM
@@ -160,6 +197,7 @@ void set_n2(uint8_t brightness);
  **********************************************************************/
 void set_d1(uint8_t brightness);
 
+
 /***********************************************************************
  * Sets the duty cycle for drive indicator 2 as a percentage of the PWM
  * 		period. Used to dim/calibrate LEDs.
@@ -169,6 +207,7 @@ void set_d1(uint8_t brightness);
  * @return void
  **********************************************************************/
 void set_d2(uint8_t brightness);
+
 
 /***********************************************************************
  * Sets the duty cycle for drive indicator 3 as a percentage of the PWM
@@ -180,6 +219,7 @@ void set_d2(uint8_t brightness);
  **********************************************************************/
 void set_d3(uint8_t brightness);
 
+
 /***********************************************************************
  * Sets the duty cycle for drive indicator 4 as a percentage of the PWM
  * 		period. Used to dim/calibrate LEDs.
@@ -189,6 +229,7 @@ void set_d3(uint8_t brightness);
  * @return void
  **********************************************************************/
 void set_d4(uint8_t brightness);
+
 
 /***********************************************************************
  * Sets the duty cycle for park backlight as a percentage of the PWM
@@ -200,6 +241,7 @@ void set_d4(uint8_t brightness);
  **********************************************************************/
 void set_bkl_p(uint8_t brightness);
 
+
 /***********************************************************************
  * Sets the duty cycle for reverse backlight as a percentage of the PWM
  * 		period. Used to dim/calibrate LEDs.
@@ -209,6 +251,7 @@ void set_bkl_p(uint8_t brightness);
  * @return void
  **********************************************************************/
 void set_bkl_r(uint8_t brightness);
+
 
 /***********************************************************************
  * Sets the duty cycle for neutral backlight as a percentage of the PWM
@@ -220,6 +263,7 @@ void set_bkl_r(uint8_t brightness);
  **********************************************************************/
 void set_bkl_n(uint8_t brightness);
 
+
 /***********************************************************************
  * Sets the duty cycle for drive backlight as a percentage of the PWM
  * 		period. Used to dim/calibrate LEDs.
@@ -229,6 +273,7 @@ void set_bkl_n(uint8_t brightness);
  * @return void
  **********************************************************************/
 void set_bkl_d(uint8_t brightness);
+
 
 /***********************************************************************
  * Sets the duty cycle for c1 backlight as a percentage of the PWM
@@ -240,6 +285,7 @@ void set_bkl_d(uint8_t brightness);
  **********************************************************************/
 void set_bkl_c1(uint8_t brightness);
 
+
 /***********************************************************************
  * Sets the duty cycle for c2 backlight as a percentage of the PWM
  * 		period. Used to dim/calibrate LEDs.
@@ -249,5 +295,6 @@ void set_bkl_c1(uint8_t brightness);
  * @return void
  **********************************************************************/
 void set_bkl_c2(uint8_t brightness);
+
 
 #endif /* LED_H_ */

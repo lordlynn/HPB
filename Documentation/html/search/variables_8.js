@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['time_0',['time',['../structanalog__contact.html#ae73654f333e4363463ad8c594eca1905',1,'analog_contact::time()'],['../structdigital__contact.html#ae73654f333e4363463ad8c594eca1905',1,'digital_contact::time()']]],
-  ['transition_1',['transition',['../structanalog__contact.html#a7908b7bb7142dea9da05fcd0a04dce1c',1,'analog_contact']]],
-  ['transition_5fcount_2',['transition_count',['../structanalog__contact.html#a7991304dd41a09282f75d2bde0f5eb95',1,'analog_contact']]]
+  ['millis_0',['millis',['../_timer_interrupt_8c.html#a5b66b314af77147a5b8eb1e44498839e',1,'millis():&#160;TimerInterrupt.c'],['../_timer_interrupt_8h.html#a5b66b314af77147a5b8eb1e44498839e',1,'millis():&#160;TimerInterrupt.c']]],
+  ['msg_5fbuf_5fsize_1',['MSG_BUF_SIZE',['../_c_a_n_8c.html#a6b5ef75b4ee94879a4210d6478cba214',1,'CAN.c']]]
 ];

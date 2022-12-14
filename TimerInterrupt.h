@@ -1,8 +1,16 @@
+/***********************************************************************
+ * This code creates interrupts at a regular interval for measuring
+ * 		elapsed time.
+ *
+ * Author:  Zac Lynn
+ * Version: Phase2.1
+ **********************************************************************/
 #ifndef TIMERINTERRUPT_H_
 #define TIMERINTERRUPT_H_
 
 /** How many Systick interrupts have happened since startup **/
-extern uint32_t count;
+extern uint32_t millis;
+
 
 /***********************************************************************
  * Initializes the systick module to interrupt consistently after the
@@ -13,5 +21,6 @@ extern uint32_t count;
  * @return void
  **********************************************************************/
 void start_systick(double delay);
+
 
 #endif 																		/* TIMERINTERRUPT_H_ */

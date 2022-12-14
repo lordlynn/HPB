@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Honda Pushbutton: C:/Users/lynnz/OneDrive - JSJ Corporation/Documents/NXPdev/HondaPushButton/src/TimerInterrupt.c Source File</title>
+<title>Honda Pushbutton: C:/Users/lynnz/Workspace2.0/HBP_Deploy/src/TimerInterrupt.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -24,8 +24,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="LOGO.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Honda Pushbutton<span id="projectnumber">&#160;Phase 1</span>
+   <div id="projectname">Honda Pushbutton<span id="projectnumber">&#160;Phase 2</span>
    </div>
    <div id="projectbrief">Written for Honda Pushbutton Demo using S32k146-LQFP100</div>
   </td>
@@ -93,11 +94,11 @@ $(document).ready(function(){initNavTree('_timer_interrupt_8c_source.html',''); 
   <div class="headertitle"><div class="title">TimerInterrupt.c</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="_timer_interrupt_8c.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;S32K144.h&quot;</span></div>
+<a href="_timer_interrupt_8c.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;S32K146.h&quot;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;<a class="code" href="_timer_interrupt_8h.html">TimerInterrupt.h</a>&quot;</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;fsl_core_cm4.h&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="_timer_interrupt_8c.html#acd96c53beeaff8f603fcda425eb295de">    6</a></span><span class="preprocessor">#define SysTick ((SysTick_Type *) (0xE000E010UL))</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="_timer_interrupt_8c.html#acd96c53beeaff8f603fcda425eb295de">    5</a></span><span class="preprocessor">#define SysTick ((SysTick_Type *) (0xE000E010UL))</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="struct_sys_tick___type.html">    9</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="struct_sys_tick___type.html#a15fc8d35f045f329b80c544bef35ff64">   11</a></span>    __IO uint32_t <a class="code hl_variable" href="struct_sys_tick___type.html#a15fc8d35f045f329b80c544bef35ff64">CTRL</a>;</div>
@@ -111,27 +112,25 @@ $(document).ready(function(){initNavTree('_timer_interrupt_8c_source.html',''); 
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>} <a class="code hl_struct" href="struct_sys_tick___type.html">SysTick_Type</a>;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="_timer_interrupt_8c.html#a86988a65e0d3ece7990c032c159786d6">   26</a></span>uint32_t <a class="code hl_variable" href="_timer_interrupt_8c.html#a86988a65e0d3ece7990c032c159786d6">count</a> = 0;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="_timer_interrupt_8c.html#a5b66b314af77147a5b8eb1e44498839e">   26</a></span>uint32_t <a class="code hl_variable" href="_timer_interrupt_8c.html#a5b66b314af77147a5b8eb1e44498839e">millis</a> = 0;</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="_timer_interrupt_8c.html#a66891ea31c3ef51a327b82d8259e3154">   28</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_timer_interrupt_8c.html#a66891ea31c3ef51a327b82d8259e3154">start_systick</a>(<span class="keywordtype">double</span> delay) {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    DISABLE_INTERRUPTS();</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_define" href="_timer_interrupt_8c.html#acd96c53beeaff8f603fcda425eb295de">SysTick</a>-&gt;LOAD = delay * 48000;                                          <span class="comment">// set SysTick timer load value. 48Mhz = 48000 cycles per ms</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_define" href="_timer_interrupt_8c.html#acd96c53beeaff8f603fcda425eb295de">SysTick</a>-&gt;CTRL = 0x7;                                                    <span class="comment">// start SysTick timer with Interrupt using core clock</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="_timer_interrupt_8c.html#a66891ea31c3ef51a327b82d8259e3154">   29</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_timer_interrupt_8c.html#a66891ea31c3ef51a327b82d8259e3154">start_systick</a>(<span class="keywordtype">double</span> delay) {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_define" href="_timer_interrupt_8c.html#acd96c53beeaff8f603fcda425eb295de">SysTick</a>-&gt;LOAD = delay * 80000;                                              <span class="comment">// Set SysTick timer load value. 80Mhz = 80000 cycles per ms</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_define" href="_timer_interrupt_8c.html#acd96c53beeaff8f603fcda425eb295de">SysTick</a>-&gt;VAL = 0;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_define" href="_timer_interrupt_8c.html#acd96c53beeaff8f603fcda425eb295de">SysTick</a>-&gt;CTRL = 0x7;                                                        <span class="comment">// Start SysTick timer with Interrupt using core clock</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>}</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    ENABLE_INTERRUPTS();</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="_timer_interrupt_8c.html#ab5e09814056d617c521549e542639b7e">   46</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_timer_interrupt_8c.html#ab5e09814056d617c521549e542639b7e">SysTick_Handler</a>(<span class="keywordtype">void</span> ) {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <a class="code hl_variable" href="_timer_interrupt_8c.html#a86988a65e0d3ece7990c032c159786d6">count</a>++;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
-<div class="ttc" id="a_timer_interrupt_8c_html_a66891ea31c3ef51a327b82d8259e3154"><div class="ttname"><a href="_timer_interrupt_8c.html#a66891ea31c3ef51a327b82d8259e3154">start_systick</a></div><div class="ttdeci">void start_systick(double delay)</div><div class="ttdef"><b>Definition:</b> <a href="_timer_interrupt_8c_source.html#l00028">TimerInterrupt.c:28</a></div></div>
-<div class="ttc" id="a_timer_interrupt_8c_html_a86988a65e0d3ece7990c032c159786d6"><div class="ttname"><a href="_timer_interrupt_8c.html#a86988a65e0d3ece7990c032c159786d6">count</a></div><div class="ttdeci">uint32_t count</div><div class="ttdef"><b>Definition:</b> <a href="_timer_interrupt_8c_source.html#l00026">TimerInterrupt.c:26</a></div></div>
-<div class="ttc" id="a_timer_interrupt_8c_html_ab5e09814056d617c521549e542639b7e"><div class="ttname"><a href="_timer_interrupt_8c.html#ab5e09814056d617c521549e542639b7e">SysTick_Handler</a></div><div class="ttdeci">void SysTick_Handler(void)</div><div class="ttdef"><b>Definition:</b> <a href="_timer_interrupt_8c_source.html#l00046">TimerInterrupt.c:46</a></div></div>
-<div class="ttc" id="a_timer_interrupt_8c_html_acd96c53beeaff8f603fcda425eb295de"><div class="ttname"><a href="_timer_interrupt_8c.html#acd96c53beeaff8f603fcda425eb295de">SysTick</a></div><div class="ttdeci">#define SysTick</div><div class="ttdef"><b>Definition:</b> <a href="_timer_interrupt_8c_source.html#l00006">TimerInterrupt.c:6</a></div></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="_timer_interrupt_8c.html#ab5e09814056d617c521549e542639b7e">   43</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_timer_interrupt_8c.html#ab5e09814056d617c521549e542639b7e">SysTick_Handler</a>(<span class="keywordtype">void</span> ) {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <a class="code hl_variable" href="_timer_interrupt_8c.html#a5b66b314af77147a5b8eb1e44498839e">millis</a>++;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="ttc" id="a_timer_interrupt_8c_html_a5b66b314af77147a5b8eb1e44498839e"><div class="ttname"><a href="_timer_interrupt_8c.html#a5b66b314af77147a5b8eb1e44498839e">millis</a></div><div class="ttdeci">uint32_t millis</div><div class="ttdef"><b>Definition:</b> <a href="_timer_interrupt_8c_source.html#l00026">TimerInterrupt.c:26</a></div></div>
+<div class="ttc" id="a_timer_interrupt_8c_html_a66891ea31c3ef51a327b82d8259e3154"><div class="ttname"><a href="_timer_interrupt_8c.html#a66891ea31c3ef51a327b82d8259e3154">start_systick</a></div><div class="ttdeci">void start_systick(double delay)</div><div class="ttdef"><b>Definition:</b> <a href="_timer_interrupt_8c_source.html#l00029">TimerInterrupt.c:29</a></div></div>
+<div class="ttc" id="a_timer_interrupt_8c_html_ab5e09814056d617c521549e542639b7e"><div class="ttname"><a href="_timer_interrupt_8c.html#ab5e09814056d617c521549e542639b7e">SysTick_Handler</a></div><div class="ttdeci">void SysTick_Handler(void)</div><div class="ttdef"><b>Definition:</b> <a href="_timer_interrupt_8c_source.html#l00043">TimerInterrupt.c:43</a></div></div>
+<div class="ttc" id="a_timer_interrupt_8c_html_acd96c53beeaff8f603fcda425eb295de"><div class="ttname"><a href="_timer_interrupt_8c.html#acd96c53beeaff8f603fcda425eb295de">SysTick</a></div><div class="ttdeci">#define SysTick</div><div class="ttdef"><b>Definition:</b> <a href="_timer_interrupt_8c_source.html#l00005">TimerInterrupt.c:5</a></div></div>
 <div class="ttc" id="a_timer_interrupt_8h_html"><div class="ttname"><a href="_timer_interrupt_8h.html">TimerInterrupt.h</a></div></div>
 <div class="ttc" id="astruct_sys_tick___type_html"><div class="ttname"><a href="struct_sys_tick___type.html">SysTick_Type</a></div><div class="ttdef"><b>Definition:</b> <a href="_timer_interrupt_8c_source.html#l00009">TimerInterrupt.c:9</a></div></div>
 <div class="ttc" id="astruct_sys_tick___type_html_a15fc8d35f045f329b80c544bef35ff64"><div class="ttname"><a href="struct_sys_tick___type.html#a15fc8d35f045f329b80c544bef35ff64">SysTick_Type::CTRL</a></div><div class="ttdeci">__IO uint32_t CTRL</div><div class="ttdef"><b>Definition:</b> <a href="_timer_interrupt_8c_source.html#l00011">TimerInterrupt.c:11</a></div></div>
@@ -144,7 +143,7 @@ $(document).ready(function(){initNavTree('_timer_interrupt_8c_source.html',''); 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_timer_interrupt_8c.html">TimerInterrupt.c</a></li>
-    <li class="footer">Generated on Mon Sep 12 2022 16:16:58 for Honda Pushbutton by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+    <li class="footer">Generated on Wed Dec 14 2022 16:30:16 for Honda Pushbutton by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
   </ul>
 </div>
 </body>

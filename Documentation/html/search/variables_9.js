@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['unpress_0',['unpress',['../structanalog__contact.html#a297803dc186979b94e45f75a1669edf1',1,'analog_contact::unpress()'],['../structdigital__contact.html#a297803dc186979b94e45f75a1669edf1',1,'digital_contact::unpress()']]]
+  ['press_0',['press',['../structanalog__contact.html#a4bc655a028f46ce8f51cebd750241602',1,'analog_contact::press()'],['../structdigital__contact.html#a4bc655a028f46ce8f51cebd750241602',1,'digital_contact::press()']]]
 ];

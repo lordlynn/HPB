@@ -1,5 +1,6 @@
 var _l_e_d_8c =
 [
+    [ "DC_INIT", "_l_e_d_8c.html#a17accee90ca27848d1ff9b989eecfbf7", null ],
     [ "PERIOD", "_l_e_d_8c.html#af281425e62298bac2df0fbe8690a4844", null ],
     [ "disable_bkl", "_l_e_d_8c.html#a23a418ba558ae2da8498e0c1db1573fb", null ],
     [ "disable_LED_drive", "_l_e_d_8c.html#aef06f8a5cf059438603ccfbf460079a9", null ],
@@ -11,6 +12,7 @@ var _l_e_d_8c =
     [ "enable_LED_neutral", "_l_e_d_8c.html#a7a96987e1938652b5646cd841c30aa92", null ],
     [ "enable_LED_park", "_l_e_d_8c.html#a3a445e1954179789724bf37d06ca5b02", null ],
     [ "enable_LED_reverse", "_l_e_d_8c.html#a53b94a7ecc48c42550244215a9592a49", null ],
+    [ "LED_controls", "_l_e_d_8c.html#aeb2037d11262a8c90cb6fce640771ba1", null ],
     [ "PWM_init", "_l_e_d_8c.html#a9816c7c730e93dba6a3e231505a40354", null ],
     [ "set_bkl_c1", "_l_e_d_8c.html#afee240f9f61795e80aea0e1870ff6a7f", null ],
     [ "set_bkl_c2", "_l_e_d_8c.html#af0aafb9d6ca79ebe58d968172553737e", null ],

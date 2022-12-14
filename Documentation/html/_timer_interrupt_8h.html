@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Honda Pushbutton: C:/Users/lynnz/OneDrive - JSJ Corporation/Documents/NXPdev/HondaPushButton/src/TimerInterrupt.h File Reference</title>
+<title>Honda Pushbutton: C:/Users/lynnz/Workspace2.0/HBP_Deploy/src/TimerInterrupt.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -24,8 +24,9 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="LOGO.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Honda Pushbutton<span id="projectnumber">&#160;Phase 1</span>
+   <div id="projectname">Honda Pushbutton<span id="projectnumber">&#160;Phase 2</span>
    </div>
    <div id="projectbrief">Written for Honda Pushbutton Demo using S32k146-LQFP100</div>
   </td>
@@ -106,8 +107,8 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a86988a65e0d3ece7990c032c159786d6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_timer_interrupt_8h.html#a86988a65e0d3ece7990c032c159786d6">count</a></td></tr>
-<tr class="separator:a86988a65e0d3ece7990c032c159786d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b66b314af77147a5b8eb1e44498839e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_timer_interrupt_8h.html#a5b66b314af77147a5b8eb1e44498839e">millis</a></td></tr>
+<tr class="separator:a5b66b314af77147a5b8eb1e44498839e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a66891ea31c3ef51a327b82d8259e3154" name="a66891ea31c3ef51a327b82d8259e3154"></a>
@@ -134,13 +135,13 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_timer_interrupt_8c_source.html#l00028">28</a> of file <a class="el" href="_timer_interrupt_8c_source.html">TimerInterrupt.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_timer_interrupt_8c_source.html#l00029">29</a> of file <a class="el" href="_timer_interrupt_8c_source.html">TimerInterrupt.c</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a86988a65e0d3ece7990c032c159786d6" name="a86988a65e0d3ece7990c032c159786d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a86988a65e0d3ece7990c032c159786d6">&#9670;&#160;</a></span>count</h2>
+<a id="a5b66b314af77147a5b8eb1e44498839e" name="a5b66b314af77147a5b8eb1e44498839e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b66b314af77147a5b8eb1e44498839e">&#9670;&#160;</a></span>millis</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -149,7 +150,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t count</td>
+          <td class="memname">uint32_t millis</td>
         </tr>
       </table>
   </td>
@@ -158,6 +159,8 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >This code creates interrupts at a regular interval for measuring elapsed time.</p>
+<p >Author: Zac Lynn Version: Phase2.1 How many Systick interrupts have happened since startup</p>
 <p >How many Systick interrupts have happened since startup </p>
 
 <p class="definition">Definition at line <a class="el" href="_timer_interrupt_8c_source.html#l00026">26</a> of file <a class="el" href="_timer_interrupt_8c_source.html">TimerInterrupt.c</a>.</p>
@@ -170,7 +173,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="_timer_interrupt_8h.html">TimerInterrupt.h</a></li>
-    <li class="footer">Generated on Mon Sep 12 2022 16:16:58 for Honda Pushbutton by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
+    <li class="footer">Generated on Wed Dec 14 2022 16:30:16 for Honda Pushbutton by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5 </li>
   </ul>
 </div>
 </body>

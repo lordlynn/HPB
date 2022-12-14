@@ -10,6 +10,7 @@ var _l_e_d_8h =
     [ "enable_LED_neutral", "_l_e_d_8h.html#a7a96987e1938652b5646cd841c30aa92", null ],
     [ "enable_LED_park", "_l_e_d_8h.html#a3a445e1954179789724bf37d06ca5b02", null ],
     [ "enable_LED_reverse", "_l_e_d_8h.html#a53b94a7ecc48c42550244215a9592a49", null ],
+    [ "LED_controls", "_l_e_d_8h.html#aeb2037d11262a8c90cb6fce640771ba1", null ],
     [ "PWM_init", "_l_e_d_8h.html#aadae3fe77e36cbf9643a22eeb99fb01e", null ],
     [ "set_bkl_c1", "_l_e_d_8h.html#afee240f9f61795e80aea0e1870ff6a7f", null ],
     [ "set_bkl_c2", "_l_e_d_8h.html#af0aafb9d6ca79ebe58d968172553737e", null ],
